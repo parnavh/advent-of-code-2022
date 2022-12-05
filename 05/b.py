@@ -18,10 +18,9 @@ def solve(input: list[str]):
                 silos[i].append(x)
         else:
             number, from_silo, to_silo = [int(a) for a in findall(r'\d+', line)]
-            arm = []
-            for _ in range(number):
-                arm.append(silos[from_silo - 1].pop())
-            silos[to_silo - 1].extend(arm[::-1])
+            n = len(silos[from_silo - 1]) - number
+            silos[to_silo - 1].extend(silos[from_silo - 1][n:])
+            del silos[from_silo - 1][n:]
 
     print(''.join([x[len(x) - 1] for x in silos]))
 
